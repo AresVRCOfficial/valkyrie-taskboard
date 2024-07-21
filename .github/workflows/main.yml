@@ -36,8 +36,8 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
+        git config --global user.name 'aresvrcofficial'
+        git config --global user.email 'aresvrcofficial@gmail.com'
         git add tasks.json
         git commit -m 'Update taskboard'
         git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
