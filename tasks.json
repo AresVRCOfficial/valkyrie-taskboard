@@ -1,0 +1,9 @@
+{
+    "tasks": [
+        {
+            "title": "Task 1",
+            "description": "Description for Task 1",
+            "status": "red"
+        }
+    ]
+}
