@@ -1,0 +1,66 @@
+name: Update Taskboard
+
+on:
+  push:
+    branches:
+      - main
+  issues:
+    types: [opened, edited, closed]
+  issue_comment:
+    types: [created]
+
+jobs:
+  update-taskboard:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Update tasks.json
+      id: update_json
+      run: |
+        cat <<EOT > tasks.json
+        {
+          "tasks": [
+            {
+              "title": "Task 1",
+              "description": "Description for Task 1"
+            }
+          ]
+        }
+        EOT
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add tasks.json
+        git commit -m 'Update taskboard'
+        git push
+
+    - name: Send notification to Discord
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      run: |
+        curl -H "Content-Type: application/json" \
+        -d '{
+            "embeds": [
+              {
+                "title": "Task Updated",
+                "description": "The taskboard has been updated.",
+                "color": 5814783,
+                "fields": [
+                  {
+                    "name": "Task",
+                    "value": "Task 1"
+                  },
+                  {
+                    "name": "Description",
+                    "value": "Description for Task 1"
+                  }
+                ]
+              }
+            ]
+          }' \
+        $DISCORD_WEBHOOK_URL
