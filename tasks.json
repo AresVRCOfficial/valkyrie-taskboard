@@ -1,14 +1,54 @@
 {
     "tasks": [
         {
-            "title": "Fix Ticket Category 'age verification' to go to the id threads channel",
-            "description": "testing",
+            "title": "Design Homepage",
+            "description": "Create a mockup for the homepage.",
+            "status": "green"
+        },
+        {
+            "title": "Setup Database",
+            "description": "Configure the database schema for the project.",
+            "status": "yellow"
+        },
+        {
+            "title": "API Integration",
+            "description": "Integrate the new API with the application.",
+            "status": "orange"
+        },
+        {
+            "title": "User Authentication",
+            "description": "Implement user login and registration functionality.",
             "status": "red"
         },
         {
-            "title": "Make automated polls for valkyrie",
-            "description": "testing",
+            "title": "Create User Profile Page",
+            "description": "Design and develop the user profile page.",
+            "status": "lightblue"
+        },
+        {
+            "title": "Write Unit Tests",
+            "description": "Write unit tests for the authentication module.",
+            "status": "green"
+        },
+        {
+            "title": "Documentation",
+            "description": "Update project documentation for new features.",
+            "status": "yellow"
+        },
+        {
+            "title": "Performance Optimization",
+            "description": "Optimize the application's performance for better speed.",
+            "status": "orange"
+        },
+        {
+            "title": "User Feedback Survey",
+            "description": "Create and distribute a survey to gather user feedback.",
             "status": "red"
+        },
+        {
+            "title": "Deploy to Production",
+            "description": "Deploy the application to the production environment.",
+            "status": "lightblue"
         }
     ]
 }
