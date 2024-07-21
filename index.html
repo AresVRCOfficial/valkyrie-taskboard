@@ -7,20 +7,50 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #7cabe9;
+            background-color: #f8f9fa;
+            color: #343a40;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #495057;
+        }
+        .task-board {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .column {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .column-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #343a40;
+        }
         .card {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 16px;
             padding: 16px;
-            width: 300px;
             border-left: 10px solid;
         }
         .green { border-color: green; }
@@ -30,21 +60,43 @@
         .lightblue { border-color: lightblue; }
         .card h3 {
             margin-top: 0;
+            color: #343a40;
+        }
+        .card p {
+            margin-bottom: 0;
+            color: #6c757d;
         }
     </style>
 </head>
 <body>
-    <div id="taskboard"></div>
+    <div class="container">
+        <h1>Taskboard</h1>
+        <div class="task-board" id="taskboard"></div>
+    </div>
     <script>
         fetch('tasks.json')
             .then(response => response.json())
             .then(data => {
                 const taskboard = document.getElementById('taskboard');
+                const columns = {
+                    green: document.createElement('div'),
+                    red: document.createElement('div'),
+                    orange: document.createElement('div'),
+                    yellow: document.createElement('div'),
+                    lightblue: document.createElement('div')
+                };
+
+                Object.keys(columns).forEach(color => {
+                    columns[color].className = 'column';
+                    columns[color].innerHTML = `<div class="column-header">${color.charAt(0).toUpperCase() + color.slice(1)}</div>`;
+                    taskboard.appendChild(columns[color]);
+                });
+
                 data.tasks.forEach(task => {
                     const card = document.createElement('div');
                     card.className = `card ${task.status}`;
                     card.innerHTML = `<h3>${task.title}</h3><p>${task.description}</p>`;
-                    taskboard.appendChild(card);
+                    columns[task.status].appendChild(card);
                 });
             });
     </script>
