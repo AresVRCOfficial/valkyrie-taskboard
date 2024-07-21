@@ -1,7 +1,12 @@
 {
     "tasks": [
         {
-            "title": "Task 1",
+            "title": "Fix Ticket Category 'age verification' to go to the id threads channel",
+            "description": "Description for Task 1",
+            "status": "red"
+        },
+        {
+            "title": "Make automated polls for valkyrie",
             "description": "Description for Task 1",
             "status": "red"
         }
