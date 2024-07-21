@@ -25,7 +25,8 @@ jobs:
           "tasks": [
             {
               "title": "Task 1",
-              "description": "Description for Task 1"
+              "description": "Description for Task 1",
+              "status": "red"
             }
           ]
         }
@@ -43,23 +44,25 @@ jobs:
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
+        TASK=$(jq -r '.tasks[-1]' tasks.json)
+        TITLE=$(echo $TASK | jq -r '.title')
+        DESCRIPTION=$(echo $TASK | jq -r '.description')
+        STATUS=$(echo $TASK | jq -r '.status')
+        COLOR="0"
+        case $STATUS in
+          "green") COLOR="65280" ;; # Green
+          "red") COLOR="16711680" ;; # Red
+          "orange") COLOR="16753920" ;; # Orange
+          "yellow") COLOR="16776960" ;; # Yellow
+          "lightblue") COLOR="65535" ;; # Light Blue
+        esac
         curl -H "Content-Type: application/json" \
         -d '{
             "embeds": [
               {
-                "title": "Task Updated",
-                "description": "The taskboard has been updated.",
-                "color": 5814783,
-                "fields": [
-                  {
-                    "name": "Task",
-                    "value": "Task 1"
-                  },
-                  {
-                    "name": "Description",
-                    "value": "Description for Task 1"
-                  }
-                ]
+                "title": "'"$TITLE"'",
+                "description": "'"$DESCRIPTION"'",
+                "color": '"$COLOR"'
               }
             ]
           }' \
