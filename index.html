@@ -7,20 +7,38 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f8f9fa;
+            color: #343a40;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #495057;
+        }
+        .task-board {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
         .card {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 16px;
             padding: 16px;
-            width: 300px;
+            width: 250px;
             border-left: 10px solid;
         }
         .green { border-color: green; }
@@ -30,11 +48,19 @@
         .lightblue { border-color: lightblue; }
         .card h3 {
             margin-top: 0;
+            color: #343a40;
+        }
+        .card p {
+            margin-bottom: 0;
+            color: #6c757d;
         }
     </style>
 </head>
 <body>
-    <div id="taskboard"></div>
+    <div class="container">
+        <h1>Taskboard</h1>
+        <div class="task-board" id="taskboard"></div>
+    </div>
     <script>
         fetch('tasks.json')
             .then(response => response.json())
@@ -50,4 +76,3 @@
     </script>
 </body>
 </html>
-
